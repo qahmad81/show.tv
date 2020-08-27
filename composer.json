@@ -12,6 +12,7 @@
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^6.3",
+        "laravel-frontend-presets/argon": "^1.1",
         "laravel/framework": "^7.24",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.2"
@@ -35,7 +36,8 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "app/"
+            "App\\": "app/",
+            "LaravelFrontendPresets\\ArgonPreset\\": "presets/argon/src"
         },
         "classmap": [
             "database/seeds",
@@ -44,7 +46,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\": "tests/"
+            "Tests\\": "tests/",
+            "LaravelFrontendPresets\\ArgonPreset\\": "presets/argon/src"
         }
     },
     "minimum-stability": "dev",
