@@ -8,6 +8,9 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Storage;
+use File;
+use Image;
 
 class RegisterController extends Controller
 {
@@ -52,6 +55,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+//            'image' => ['file', 'mimes:jpeg,png,gif', 'max:2024'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -64,9 +68,23 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+
+        if ($data['image']){
+            $image = $data['image'];
+            $ext = $image->getClientOriginalExtension();
+            $imgname = time() . '.' . $ext;
+
+            $image_resize = Image::make($image->getRealPath());
+            $image_resize->resize(300,300);
+            $image_resize->save(Storage::disk('users')->path('') . $imgname);
+
+            $data['image'] = $imgname;
+        }
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
+            'image' => $data['image'],
             'password' => Hash::make($data['password']),
         ]);
     }

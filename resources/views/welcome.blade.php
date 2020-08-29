@@ -1,22 +1,24 @@
-@extends('layouts.app', ['class' => 'bg-default'])
+@extends('layouts.app')
 
 @section('content')
-    <div class="header bg-gradient-primary py-7 py-lg-8">
-        <div class="container">
-            <div class="header-body text-center mt-7 mb-7">
-                <div class="row justify-content-center">
-                    <div class="col-lg-5 col-md-6">
-                        <h1 class="text-white">{{ __('Welcome to Argon Dashboard FREE Laravel Live Preview.') }}</h1>
-                    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-6 d-flex flex-column justify-content-center">
+                <div class="py-3"><h1>Link building is one of most important</h1></div>
+                <div><h4>evrey little help. Submit domain and get dofollo backlink from our website</h4></div>
+                <div class="py-5"><a href="#" class="btn btn-primary">Submit your domain</a></div>
+            </div>
+            <div class="col-6">
+                <div class="d-felx justify-content-end align-items-center">
+                    <img class="w-100 py-5 pl-5" src="{{asset('img/2.jpg')}}" alt="main image"></div>
                 </div>
             </div>
-        </div>
-        <div class="separator separator-bottom separator-skew zindex-100">
-            <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
-                <polygon class="fill-default" points="2560 0 2560 100 0 100"></polygon>
-            </svg>
+            <div class="d-flex justify-content-center">
+                <h2 class="font-weight-bolder">Categories</h2>
+            </div>
+
         </div>
     </div>
 
-    <div class="container mt--10 pb-5"></div>
+
 @endsection

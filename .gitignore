@@ -1,6 +1,5 @@
 /node_modules
 /vendor/
-node_modules/
 npm-debug.log
 yarn-error.log
 storage/
@@ -21,3 +20,8 @@ config/
 presets/
 public/argon
 public/assets
+app/public/episodes
+app/public/users
+LICENSE
+README.md
+package-lock.json
