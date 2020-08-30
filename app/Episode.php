@@ -40,6 +40,9 @@ class Episode extends Model
     	return $this->belongsTo(Series::class);
     }
 
+    public function likes() {
+        return $this->hasMany(Like::class);
+    }
 
     public function getrand() {
          return $this->select('episodes.*')->orderBy($this->raw('RAND()'))

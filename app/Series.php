@@ -31,6 +31,10 @@ class Series extends Model
     	return $this->hasMany(Episode::class);
     }
 
+    public function followers() {
+        return $this->hasMany(Follow::class);
+    }
+
     /**
      * Attributes that should be mass-assignable.
      *

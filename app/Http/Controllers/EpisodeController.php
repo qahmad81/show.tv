@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Series;
 use App\Episode;
+use App\Like;
 use Storage;
 use File;
 use Image;
@@ -99,6 +101,11 @@ class EpisodeController extends AdminController
         $episode->ext = $videoAry[count($videoAry)-1];
         $menuSerieses = Series::take(5)->get();
 
+        $like = new Like();
+        $like->episode_id = $id;
+        $like->user_id = Auth::id();
+        $episode->is_like = $like->isLike();
+
         return view('episodes.show', compact('episode', 'menuSerieses'));
     }
 
@@ -116,6 +123,40 @@ class EpisodeController extends AdminController
 
         return view('episodes.edit', compact('episode', 'serieses'))
             ->with('submiturl', route('episodes.update', $episode->id));
+    }
+
+
+    /**
+     * add user like
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function like($id)
+    {
+        $like = new Like();
+        $like->episode_id = $id;
+        $like->user_id = Auth::id();
+        if (!$like->isLike())
+            $like->save();
+        $episode = Episode::find($id);
+
+        return $episode->likes->count();
+    }
+
+    /**
+     * remove user dislike
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function dislike($id)
+    {
+        Like::where('episode_id', '=', $id)->where('user_id', '=', Auth::id())->delete();;
+
+        $episode = Episode::find($id);
+
+        return $episode->likes->count();
     }
 
     /**

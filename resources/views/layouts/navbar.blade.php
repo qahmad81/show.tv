@@ -6,13 +6,13 @@
         </a>
         @auth
         @if (Auth::id() == 1)
-        <a class="navbar-brand" href="{{ route('series.index') }}">
+        <a class="navbar" href="{{ route('series.index') }}">
             {{ __('Series') }}
         </a>
-        <a class="navbar-brand" href="{{ route('episodes.index') }}">
+        <a class="navbar" href="{{ route('episodes.index') }}">
             {{ __('Episodes') }}
         </a>
-        <a class="navbar-brand" href="{{ url('user') }}">
+        <a class="navbar" href="{{ url('user') }}">
             {{ __('Users') }}
         </a>
         @else
@@ -23,7 +23,7 @@
 
         @if(isset($menuSerieses)&&Auth::id() != 1)
         @foreach($menuSerieses as $series)
-        <a class="navbar-brand" href="{{ route('series.show',$series->id) }}">
+        <a class="navbar" href="{{ route('series.show',$series->id) }}">
             {{ $series->title }}
         </a>
         @endforeach

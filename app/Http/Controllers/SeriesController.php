@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 use App\Series;
+use App\Follow;
 
 /**
  * Class SeriesController
@@ -71,6 +73,10 @@ class SeriesController extends AdminController
         $series = Series::find($id);
         $menuSerieses = Series::take(5)->get();
 
+        $follow = new Follow();
+        $follow->series_id = $id;
+        $follow->user_id = Auth::id();
+        $series->is_follow = $follow->isFollow();
 
         return view('series.show', compact('series', 'menuSerieses'));
     }
@@ -87,6 +93,39 @@ class SeriesController extends AdminController
         $series = Series::find($id);
 
         return view('series.edit', compact('series'));
+    }
+
+    /**
+     * add user follow
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function follow($id)
+    {
+        $follow = new Follow();
+        $follow->series_id = $id;
+        $follow->user_id = Auth::id();
+        if (!$follow->isFollow())
+            $follow->save();
+        $series = Series::find($id);
+
+        return $series->followers->count();
+    }
+
+    /**
+     * remove user follow
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function unfollow($id)
+    {
+        Follow::where('series_id', '=', $id)->where('user_id', '=', Auth::id())->delete();;
+
+        $series = Series::find($id);
+
+        return $series->followers->count();
     }
 
     /**

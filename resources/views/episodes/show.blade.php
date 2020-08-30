@@ -51,6 +51,24 @@
                             {{ $episode->airing_time }}
                         </div>
 
+
+                        <div class="row">
+                            <div class="form-group col-2">
+                                {{  __('Likes') }}: 
+                                <span id="likes">{{ $episode->likes->count() }}</span>
+                            </div>
+                            <div class="form-group col-10">
+                            @if ($episode->is_follow)
+                                <button type="button" id="likebtn" onclick="toggleLike()" class="btn btn-outline-primary">
+                                {{  __('Liked') }} </button>
+                            @else
+                                <button type="button" id="likebtn" onclick="toggleLike()" class="btn btn-outline-secondary">
+                                {{  __('Like') }} </button>
+                            @endif
+                            </div>
+                        </div>
+
+
                         </div>
                         </div>
 
@@ -73,4 +91,30 @@ Your browser does not support the video tag.
             </div>
         </div>
     </section>
+<script type="text/javascript">
+    function toggleLike() {
+        if ($( "#likebtn" ).hasClass('btn-outline-secondary')) {
+            $.ajax({
+              url: "{{ url('episodes/like/' . $episode->id) }}",
+              context: document.body
+            }).done(function(likes) {
+                $( "#likes" ).text(likes);
+                $( "#likebtn" ).removeClass( "btn-outline-secondary" );
+                $( "#likebtn" ).addClass( "btn-outline-primary" );
+                $( "#likebtn" ).text( "{{ __('Liked') }}" );
+            });
+        } else {
+        $.ajax({
+          url: "{{ url('episodes/dislike/' . $episode->id) }}",
+          context: document.body
+        }).done(function(likes) {
+            $( "#likes" ).text(likes);
+            $( "#likebtn" ).removeClass( "btn-outline-primary" );
+            $( "#likebtn" ).addClass( "btn-outline-secondary" );
+            $( "#likebtn" ).text( "{{ __('Like') }}" );
+        });
+        }
+    }
+</script>
+
 @endsection
