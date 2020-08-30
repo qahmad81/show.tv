@@ -4,6 +4,29 @@
         <a class="navbar-brand" href="{{ url('/') }}">
             <img src="{{ asset('img/logo.png') }}" alt="">
         </a>
+
+            
+
+
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent"  style="position: relative;">
+
+
+        <nav class="navbar navbar-light" style="position: absolute; top: -5px;">
+          <form class="form-inline" action="{{ url('search') }}">
+            @csrf
+            <input class="form-control mr-sm-2" type="search" name="search" placeholder="{{ __('Search in Episodes')}}"
+                @if(isset($searchword)) value="{{$searchword}}" @endif aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">{{ __('Search')}}</button>
+          </form>
+        </nav>
+
+            <!-- Left Side Of Navbar -->
+            <ul class="navbar-nav mr-auto" style="position: absolute;top: 45px;">
         @auth
         @if (Auth::id() == 1)
         <a class="navbar" href="{{ route('series.index') }}">
@@ -28,14 +51,6 @@
         </a>
         @endforeach
         @endif
-
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <!-- Left Side Of Navbar -->
-            <ul class="navbar-nav mr-auto">
 
             </ul>
 
@@ -74,5 +89,6 @@
                 @endguest
             </ul>
         </div>
+
     </div>
 </nav>
