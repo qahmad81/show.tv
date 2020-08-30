@@ -47,9 +47,7 @@
                                 <input id="image" type="file" class="form-group-file" name="image">
 
                                 @error('image')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                    <div class="error text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
