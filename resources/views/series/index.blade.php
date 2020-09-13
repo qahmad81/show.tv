@@ -49,12 +49,13 @@
 											<td>{{ $series->airing_time }}</td>
 
                                             <td>
-                                                <form action="{{ route('series.destroy',$series->id) }}" method="POST">
+                                                <form action="{{ route('series.destroy',$series->id) }}" 
+                                                    onsubmit="return confirm('Are you sure for delete?');" method="POST">
                                                     <a class="btn btn-sm btn-primary " href="{{ route('series.show',$series->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
                                                     <a class="btn btn-sm btn-success" href="{{ route('series.edit',$series->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Delete</button>
+                                                    <button type="submit"  class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Delete</button>
                                                 </form>
                                             </td>
                                         </tr>

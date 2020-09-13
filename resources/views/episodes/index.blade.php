@@ -53,7 +53,8 @@
 											<td>{{ $episode->airing_time }}</td>
 
                                             <td>
-                                                <form action="{{ route('episodes.destroy',$episode->id) }}" method="POST">
+                                                <form action="{{ route('episodes.destroy',$episode->id) }}" 
+                                                    onsubmit="return confirm('Are you sure for delete?');" method="POST">
                                                     <a class="btn btn-sm btn-primary " href="{{ route('episodes.show',$episode->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
                                                     <a class="btn btn-sm btn-success" href="{{ route('episodes.edit',$episode->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
                                                     @csrf

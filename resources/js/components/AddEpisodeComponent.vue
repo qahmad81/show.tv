@@ -55,16 +55,18 @@
 
             <div class="form-group">
                 <label for="image">Image</label>
-                <input type="file" class="form-control-file" id="image"
+                <input type="file" class="form-control-file" id="image" @change="onImageChange"
                     :class="{ 'is-invalid' : form1.errors.has('image') }">
+                    <img  id="img-div" v-if="this.img1" :src="this.img1" height="50" />
                     <div class="invalid-feedback" v-show="form1.errors.has('image')"
                         v-text="form1.errors.get('image')"></div>
             </div>
 
             <div class="form-group">
                 <label for="video">Video</label>
-                <input type="file" class="form-control-file" id="video"
+                <input type="file" class="form-control-file" id="video" @change="onVideoChange"
                     :class="{ 'is-invalid' : form1.errors.has('video') }">
+                    <a target="_blank" id="vid-link" v-if="this.vid1" :href="this.vid1">Video</a>
                     <div class="invalid-feedback" v-show="form1.errors.has('video')"
                         v-text="form1.errors.get('video')"></div>
             </div>
@@ -72,26 +74,38 @@
             <button type="submit" class="btn btn-primary">Submit The Series</button>
 
         </form>
+        <div v-if="this.loading" id="background-looding"></div>
     </div>
 </template>
 
 
 <script>
+
     export default {
         props: ['serieses', 'submiturl'],
         data() {
             return{
+                img1: '',
+                vid1: '',
+                loading: '',
                 form1: new Form({
                     title: '',
                     description: '',
                     duration: '',
                     airing_time: '',
                     series_id: '',
-                    video: '',
                 })
             }
         },
         methods:{
+            onVideoChange(e) {
+              const file = e.target.files[0];
+              this.vid1 = URL.createObjectURL(file);
+            },
+            onImageChange(e) {
+              const file = e.target.files[0];
+              this.img1 = URL.createObjectURL(file);
+            },
             submitEpisode() {
                 let data = new FormData();
                 data.append('title', this.form1.title);
@@ -99,16 +113,19 @@
                 data.append('duration', this.form1.duration);
                 data.append('airing_time', this.form1.airing_time);
                 data.append('series_id', this.form1.series_id);
-                data.append('video', this.form1.video);
                 if (document.getElementById('image').files[0])
                     data.append('image', document.getElementById('image').files[0]);
                 if (document.getElementById('video').files[0])
                     data.append('video', document.getElementById('video').files[0]);
+                this.loading = '1';
                 axios.post(this.submiturl, data)
                 .then( (response) =>{
                     this.form1.reset();
                     document.getElementById('f1').reset();
+                    this.vid1 = '';
+                    this.img1 = '';
                     alert('Data sent');
+                    this.loading = '';
                 })
                 .catch(error => this.form1.errors.record(error.response.data))
             }

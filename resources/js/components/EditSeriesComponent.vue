@@ -34,6 +34,7 @@
 
             <button type="submit" class="btn btn-primary">Submit The Series</button>
         </form>
+        <div v-if="this.loading" id="background-looding"></div>
     </div>
 </template>
 
@@ -42,6 +43,7 @@
         props: ['series', 'submiturl', 'token1'],
         data() {
             return{
+                loading: '',
                 form1: new Form({
                     title: this.series.title,
                     description: this.series.description,
@@ -57,9 +59,11 @@
                 data.append('title', this.form1.title);
                 data.append('description', this.form1.description);
                 data.append('airing_time', this.form1.airing_time);
+                this.loading = '1';
                 axios.post(this.submiturl, data)
                 .then( (response) =>{
                     alert('Data Saved');
+                    this.loading = '';
                 })
                 .catch(error => this.form1.errors.record(error.response.data));
             }

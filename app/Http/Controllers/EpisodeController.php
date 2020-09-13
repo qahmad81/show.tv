@@ -119,9 +119,12 @@ class EpisodeController extends AdminController
     {
         if (!$this->isAdmin()) return $this->noPerm();
         $episode = Episode::find($id);
-        $serieses = Series::pluck('title', 'id');
+        $episode->img = Storage::disk('episodes')->url($episode->image);
+        $episode->vid = Storage::disk('episodes')->url($episode->video);
+        //$serieses = Series::pluck('title', 'id');
+        $serieses = Series::get();       
 
-        return view('episodes.edit', compact('episode', 'serieses'))
+        return view('episodes.vedit', compact('episode', 'serieses'))
             ->with('submiturl', route('episodes.update', $episode->id));
     }
 
@@ -215,7 +218,13 @@ class EpisodeController extends AdminController
     public function destroy($id)
     {
         if (!$this->isAdmin()) die('No Permission');
-        $episode = Episode::find($id)->delete();
+
+        $episode = Episode::find($id);
+
+        Storage::disk('episodes')->delete($episode->image);
+        Storage::disk('episodes')->delete($episode->video);
+
+        $episode->delete();
 
         return redirect()->route('episodes.index')
             ->with('success', 'Episode deleted successfully');

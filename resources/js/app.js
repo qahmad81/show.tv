@@ -33,10 +33,10 @@ Vue.component('show-series-component', require('./components/ShowSeriesComponent
 Vue.component('add-series-component', require('./components/AddSeriesComponent.vue').default);
 Vue.component('edit-series-component', require('./components/EditSeriesComponent.vue').default);
 
-Vue.component('vue-editor-episode', require('./components/vueEditorEpisode.vue').default);
-Vue.component('vue-editor-series', require('./components/vueEditorSeries.vue').default);
 
 Vue.component('add-episode-component', require('./components/AddEpisodeComponent.vue').default);
+Vue.component('edit-episode-component', require('./components/EditEpisodeComponent.vue').default);
+
 
 
 /**
