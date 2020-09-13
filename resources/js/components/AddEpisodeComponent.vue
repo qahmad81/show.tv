@@ -108,6 +108,7 @@
                 .then( (response) =>{
                     this.form1.reset();
                     document.getElementById('f1').reset();
+                    alert('Data sent');
                 })
                 .catch(error => this.form1.errors.record(error.response.data))
             }

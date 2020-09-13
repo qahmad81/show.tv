@@ -31,6 +31,7 @@ Vue.component('test-component', require('./components/TestComponent.vue').defaul
 Vue.component('show-series-component', require('./components/ShowSeriesComponent.vue').default);
 
 Vue.component('add-series-component', require('./components/AddSeriesComponent.vue').default);
+Vue.component('edit-series-component', require('./components/EditSeriesComponent.vue').default);
 
 Vue.component('vue-editor-episode', require('./components/vueEditorEpisode.vue').default);
 Vue.component('vue-editor-series', require('./components/vueEditorSeries.vue').default);

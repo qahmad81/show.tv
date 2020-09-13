@@ -31,6 +31,7 @@
                         v-text="form1.errors.get('airing_time')"></div>
             </div>
 
+
             <button type="submit" class="btn btn-primary">Submit The Series</button>
         </form>
     </div>
@@ -38,19 +39,21 @@
 
 <script>
     export default {
-        props: ['series', 'submiturl'],
+        props: ['series', 'submiturl', 'token1'],
         data() {
             return{
                 form1: new Form({
                     title: this.series.title,
                     description: this.series.description,
-                    airing_time: this.series.airing_time,
+                    airing_time: this.series.airing_time
                 })
             }
         },
         methods:{
             submitSeries() {
                 let data = new FormData();
+                data.append('_method', 'PATCH');
+                data.append('_token', this.token1);
                 data.append('title', this.form1.title);
                 data.append('description', this.form1.description);
                 data.append('airing_time', this.form1.airing_time);
@@ -58,7 +61,7 @@
                 .then( (response) =>{
                     alert('Data Saved');
                 })
-                .catch(error => this.form1.errors.record(error.response.data))
+                .catch(error => this.form1.errors.record(error.response.data));
             }
         }
 

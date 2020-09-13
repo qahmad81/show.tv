@@ -2017,6 +2017,7 @@ __webpack_require__.r(__webpack_exports__);
         _this.form1.reset();
 
         document.getElementById('f1').reset();
+        alert('Data sent');
       })["catch"](function (error) {
         return _this.form1.errors.record(error.response.data);
       });
@@ -2096,6 +2097,86 @@ __webpack_require__.r(__webpack_exports__);
         _this.form1.reset();
 
         alert('Data sent');
+      })["catch"](function (error) {
+        return _this.form1.errors.record(error.response.data);
+      });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/EditSeriesComponent.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/EditSeriesComponent.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['series', 'submiturl', 'token1'],
+  data: function data() {
+    return {
+      form1: new Form({
+        title: this.series.title,
+        description: this.series.description,
+        airing_time: this.series.airing_time
+      })
+    };
+  },
+  methods: {
+    submitSeries: function submitSeries() {
+      var _this = this;
+
+      var data = new FormData();
+      data.append('_method', 'PATCH');
+      data.append('_token', this.token1);
+      data.append('title', this.form1.title);
+      data.append('description', this.form1.description);
+      data.append('airing_time', this.form1.airing_time);
+      axios.post(this.submiturl, data).then(function (response) {
+        alert('Data Saved');
       })["catch"](function (error) {
         return _this.form1.errors.record(error.response.data);
       });
@@ -51919,6 +52000,193 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/EditSeriesComponent.vue?vue&type=template&id=741558c1&":
+/*!**********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/EditSeriesComponent.vue?vue&type=template&id=741558c1& ***!
+  \**********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c(
+      "form",
+      {
+        attrs: { method: "post", enctype: "multipart/form-data" },
+        on: {
+          submit: function($event) {
+            $event.preventDefault()
+            return _vm.submitSeries($event)
+          }
+        }
+      },
+      [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "title" } }, [_vm._v("Title")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.form1.title,
+                expression: "form1.title"
+              }
+            ],
+            staticClass: "form-control",
+            class: { "is-invalid": _vm.form1.errors.has("title") },
+            attrs: {
+              type: "text",
+              id: "title",
+              name: "title",
+              placeholder: "Please Enter Title there"
+            },
+            domProps: { value: _vm.form1.title },
+            on: {
+              keydown: function($event) {
+                return _vm.form1.errors.clear("title")
+              },
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.form1, "title", $event.target.value)
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("div", {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.form1.errors.has("title"),
+                expression: "form1.errors.has('title')"
+              }
+            ],
+            staticClass: "invalid-feedback",
+            domProps: { textContent: _vm._s(_vm.form1.errors.get("title")) }
+          })
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "form-group" },
+          [
+            _c("label", { attrs: { for: "description" } }, [
+              _vm._v("Description")
+            ]),
+            _vm._v(" "),
+            _c("vue-editor", {
+              class: { "is-invalid": _vm.form1.errors.has("description") },
+              attrs: { id: "description", name: "description" },
+              on: {
+                keydown: function($event) {
+                  return _vm.form1.errors.clear("description")
+                }
+              },
+              model: {
+                value: _vm.form1.description,
+                callback: function($$v) {
+                  _vm.$set(_vm.form1, "description", $$v)
+                },
+                expression: "form1.description"
+              }
+            }),
+            _vm._v(" "),
+            _c("div", {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.form1.errors.has("description"),
+                  expression: "form1.errors.has('description')"
+                }
+              ],
+              staticClass: "invalid-feedback",
+              domProps: {
+                textContent: _vm._s(_vm.form1.errors.get("description"))
+              }
+            })
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "airing_time" } }, [
+            _vm._v("Airing Time")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.form1.airing_time,
+                expression: "form1.airing_time"
+              }
+            ],
+            staticClass: "form-control",
+            class: { "is-invalid": _vm.form1.errors.has("airing_time") },
+            attrs: {
+              type: "text",
+              id: "airing_time",
+              name: "airing_time",
+              placeholder: "Please set Airing Time her"
+            },
+            domProps: { value: _vm.form1.airing_time },
+            on: {
+              keydown: function($event) {
+                return _vm.form1.errors.clear("airing_time")
+              },
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.form1, "airing_time", $event.target.value)
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("div", {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.form1.errors.has("airing_time"),
+                expression: "form1.errors.has('airing_time')"
+              }
+            ],
+            staticClass: "invalid-feedback",
+            domProps: {
+              textContent: _vm._s(_vm.form1.errors.get("airing_time"))
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c(
+          "button",
+          { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+          [_vm._v("Submit The Series")]
+        )
+      ]
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ShowSeriesComponent.vue?vue&type=template&id=c1442e24&":
 /*!**********************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ShowSeriesComponent.vue?vue&type=template&id=c1442e24& ***!
@@ -65441,6 +65709,7 @@ window.Form = _Form__WEBPACK_IMPORTED_MODULE_1__["default"];
 Vue.component('test-component', __webpack_require__(/*! ./components/TestComponent.vue */ "./resources/js/components/TestComponent.vue")["default"]);
 Vue.component('show-series-component', __webpack_require__(/*! ./components/ShowSeriesComponent.vue */ "./resources/js/components/ShowSeriesComponent.vue")["default"]);
 Vue.component('add-series-component', __webpack_require__(/*! ./components/AddSeriesComponent.vue */ "./resources/js/components/AddSeriesComponent.vue")["default"]);
+Vue.component('edit-series-component', __webpack_require__(/*! ./components/EditSeriesComponent.vue */ "./resources/js/components/EditSeriesComponent.vue")["default"]);
 Vue.component('vue-editor-episode', __webpack_require__(/*! ./components/vueEditorEpisode.vue */ "./resources/js/components/vueEditorEpisode.vue")["default"]);
 Vue.component('vue-editor-series', __webpack_require__(/*! ./components/vueEditorSeries.vue */ "./resources/js/components/vueEditorSeries.vue")["default"]);
 Vue.component('add-episode-component', __webpack_require__(/*! ./components/AddEpisodeComponent.vue */ "./resources/js/components/AddEpisodeComponent.vue")["default"]);
@@ -65634,6 +65903,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddSeriesComponent_vue_vue_type_template_id_1a8c0c90___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddSeriesComponent_vue_vue_type_template_id_1a8c0c90___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/EditSeriesComponent.vue":
+/*!*********************************************************!*\
+  !*** ./resources/js/components/EditSeriesComponent.vue ***!
+  \*********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _EditSeriesComponent_vue_vue_type_template_id_741558c1___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./EditSeriesComponent.vue?vue&type=template&id=741558c1& */ "./resources/js/components/EditSeriesComponent.vue?vue&type=template&id=741558c1&");
+/* harmony import */ var _EditSeriesComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EditSeriesComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/EditSeriesComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _EditSeriesComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _EditSeriesComponent_vue_vue_type_template_id_741558c1___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _EditSeriesComponent_vue_vue_type_template_id_741558c1___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/EditSeriesComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/EditSeriesComponent.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/EditSeriesComponent.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EditSeriesComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./EditSeriesComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/EditSeriesComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EditSeriesComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/EditSeriesComponent.vue?vue&type=template&id=741558c1&":
+/*!****************************************************************************************!*\
+  !*** ./resources/js/components/EditSeriesComponent.vue?vue&type=template&id=741558c1& ***!
+  \****************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditSeriesComponent_vue_vue_type_template_id_741558c1___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./EditSeriesComponent.vue?vue&type=template&id=741558c1& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/EditSeriesComponent.vue?vue&type=template&id=741558c1&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditSeriesComponent_vue_vue_type_template_id_741558c1___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditSeriesComponent_vue_vue_type_template_id_741558c1___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

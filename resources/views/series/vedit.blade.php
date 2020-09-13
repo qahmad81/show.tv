@@ -20,7 +20,7 @@
                         </div>
                     @endif
                     
-                    <edit-series-component :series="{{$series}}" submiturl="{{$submiturl}}"></edit-series-component>
+                    <edit-series-component :series="{{$series}}" submiturl="{{$submiturl}}" token1="{{csrf_token()}}"></edit-series-component>
 
                 </div>
             </div>

@@ -92,7 +92,7 @@ class SeriesController extends AdminController
         if (!$this->isAdmin()) return $this->noPerm();
         $series = Series::find($id);
 
-        return view('series.edit', compact('series'));
+        return view('series.vedit', compact('series'))->with('submiturl', route('series.update',$id));
     }
 
     /**
@@ -139,6 +139,9 @@ class SeriesController extends AdminController
     {
         if (!$this->isAdmin()) die('No Permission');
         request()->validate(Series::$rules);
+        $series->title = $request['title'];
+        $series->description = $request['description'];
+        $series->airing_time = $request['airing_time'];
 
         $series->update($request->all());
 
