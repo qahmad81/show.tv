@@ -4,11 +4,11 @@ This app is Demo TV channels to view there TV Shows and Episodes.
 
 ## Technology Used
 
-•	Laravel 7
-•	PHP 7.4
-•	MySQL
-•	Bootstrap 4
-•	VueJS
+-	Laravel 7
+-	PHP 7.4
+-	MySQL
+-	Bootstrap 4
+-	VueJS
 
 
 ## Installation 
