@@ -9,10 +9,12 @@ class Restores extends Model
 {
 
     static public function restore() {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         DB::table('likes')->truncate();
         DB::table('follows')->truncate();
         DB::table('series')->truncate();
         DB::table('episodes')->truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
         DB::statement("INSERT INTO `series` (`id`, `title`, `description`, `airing_time`, `created_at`, `updated_at`) VALUES
 (1, 'مطبخ رؤيا', '<p style=\"direction: rtl;\" class=\"ql-align-right\"><span style=\"color: rgb(161, 0, 0);\">برنامج يقدم مقادير وطرق تحضير المأكولات والأطباق المحلية </span><strong style=\"color: rgb(161, 0, 0);\">والعربيه </strong><span style=\"color: rgb(161, 0, 0);\">والعالمية </span><strong style=\"color: rgb(161, 0, 0);\">قناة رؤيا</strong></p>', 'السبت الى الخميس قناة رؤيا', '2020-08-29 02:43:35', '2020-09-13 23:37:51'),
 (2, 'نضال البريحي', '<p class=\"ql-align-right\"><span style=\"color: rgb(161, 0, 0);\"> برنامج يقدم مقادير وطرق تحضير المأكولات والأطباق المحلية والعربيه والعالمية .</span><strong style=\"color: rgb(161, 0, 0);\"> قناة رؤيا</strong></p><p class=\"ql-align-right\" style=\"direction: rtl;\">مع<strong> نضال البريحي</strong></p>', 'السبت الى الخميس', '2020-08-29 02:57:20', '2020-08-29 07:56:37'),
