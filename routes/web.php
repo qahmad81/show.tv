@@ -19,6 +19,7 @@ Route::get('/', 'Home2Controller@index')->name('home');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home2');
+Route::get('/restore', 'Home2Controller@restore');
 Route::get('/search', 'Home2Controller@search');
 
 Route::get('/user', 'UsersController@index');
