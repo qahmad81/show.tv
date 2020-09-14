@@ -87,19 +87,27 @@ if you have problem or you want a free-lance project like this or hire me contac
 - https://www.upwork.com/freelancers/~01a860c10ff10c955e
 - qahmad1981@gmail.com
 - whatsapp: 00962788705927
+
 I can develop your project like this in your requirement in about 10 hours with uploading and setting up in your hosting at max 10 hour, so in my hour price it will cost you about 200$ only, and sure more customization mean more time and more extra cost.
+
 Any free lance work should be via freelancer.com or upwork.com no direct dealings.
 
 ## Demo Site
 you can check this project at link below:
 http://showtv.odehit.com/index.php/
+
 please use (index.php) in this site there is problem in htaccess file in this hosting
-admin user:
+#### admin user:
+
 qahmad1981@gmail.com
+
 123456789
 
-normal user:
+
+#### normal user:
+
 skamal@hotmail.com
+
 123456789
 
 the data well reset at each visit
