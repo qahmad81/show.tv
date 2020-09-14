@@ -9,13 +9,15 @@ class Restores extends Model
 {
 
     static public function restore() {
+        DB::table('likes')->truncate();
+        DB::table('follows')->truncate();
         DB::table('series')->truncate();
+        DB::table('episodes')->truncate();
         DB::statement("INSERT INTO `series` (`id`, `title`, `description`, `airing_time`, `created_at`, `updated_at`) VALUES
 (1, 'مطبخ رؤيا', '<p style=\"direction: rtl;\" class=\"ql-align-right\"><span style=\"color: rgb(161, 0, 0);\">برنامج يقدم مقادير وطرق تحضير المأكولات والأطباق المحلية </span><strong style=\"color: rgb(161, 0, 0);\">والعربيه </strong><span style=\"color: rgb(161, 0, 0);\">والعالمية </span><strong style=\"color: rgb(161, 0, 0);\">قناة رؤيا</strong></p>', 'السبت الى الخميس قناة رؤيا', '2020-08-29 02:43:35', '2020-09-13 23:37:51'),
 (2, 'نضال البريحي', '<p class=\"ql-align-right\"><span style=\"color: rgb(161, 0, 0);\"> برنامج يقدم مقادير وطرق تحضير المأكولات والأطباق المحلية والعربيه والعالمية .</span><strong style=\"color: rgb(161, 0, 0);\"> قناة رؤيا</strong></p><p class=\"ql-align-right\" style=\"direction: rtl;\">مع<strong> نضال البريحي</strong></p>', 'السبت الى الخميس', '2020-08-29 02:57:20', '2020-08-29 07:56:37'),
 (3, 'مطبخ رؤيا مع نبيل', '<p>مطبخ رؤيا مع نبيل</p>', 'يوم الجمع الساعه 11 مسائا', '2020-08-29 03:07:11', '2020-08-29 03:07:11');");
 
-        DB::table('episodes')->truncate();
         DB::statement("INSERT INTO `episodes` (`id`, `series_id`, `title`, `description`, `duration`, `airing_time`, `image`, `video`, `created_at`, `updated_at`) VALUES
 (1, 1, 'فوائد المغنيسيوم للجسم وأعراض نقصه - رند الديسي', '<h1>فوائد المغنيسيوم للجسم وأعراض نقصه - رند الديسي</h1><p><br></p>', 50, 'السبت الى الخميس قناة رؤيا', '1598680295.png', '1598680296.mp4', '2020-08-29 02:51:36', '2020-08-29 02:51:36'),
 (2, 2, 'سلطة الفول الأخضر مع البقلة والنعنع', '<p>سلطة الفول الأخضر مع البقلة والنعنع</p>', 55, 'يوم الجمع الساعه 11 مسائا', '1598680753.png', '1598680753.mp4', '2020-08-29 02:59:13', '2020-08-29 02:59:13'),
@@ -28,14 +30,12 @@ class Restores extends Model
 (9, 1, 'لمحبي الغموس.. غموس اللبنة الحارة مع الخضار', '<p>لمحبي الغموس.. غموس اللبنة الحارة مع الخضار</p>', 6, 'السبت الى الخميس قناة رؤيا', '1598681486.png', '1598681487.mp4', '2020-08-29 03:11:27', '2020-08-29 03:11:27'),
 (10, 1, 'سلمى زوايدة معدة مطبخ رؤيا في محمية الأزرق', '<p>سلمى زوايدة معدة مطبخ رؤيا في محمية الأزرق</p>', 10, 'السبت الى الخميس قناة رؤيا', '1598681543.png', '1598681543.mp4', '2020-08-29 03:12:23', '2020-08-29 03:12:23');");
 
-        DB::table('likes')->truncate();
         DB::statement("INSERT INTO `likes` (`id`, `user_id`, `episode_id`, `created_at`, `updated_at`) VALUES
 (2, 7, 2, '2020-08-30 10:19:55', '2020-08-30 10:19:55'),
 (4, 7, 1, '2020-08-30 11:36:07', '2020-08-30 11:36:07'),
 (6, 9, 2, '2020-08-30 17:36:03', '2020-08-30 17:36:03'),
 (7, 1, 3, '2020-09-13 23:48:37', '2020-09-13 23:48:37');");
 
-        DB::table('follows')->truncate();
         DB::statement("INSERT INTO `follows` (`id`, `user_id`, `series_id`, `created_at`, `updated_at`) VALUES
 (5, 7, 2, '2020-08-30 13:52:25', '2020-08-30 13:52:25'),
 (6, 9, 2, '2020-08-30 17:35:53', '2020-08-30 17:35:53'),
