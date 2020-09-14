@@ -92,6 +92,10 @@ I can develop your project like this in your requirement in about 10 hours with 
 
 Any free lance work should be via freelancer.com or upwork.com no direct dealings.
 
+Time will be calculated via (سلطة الإنجاز) app, so no wasted time and no payment for rest time.. just time of work.
+
+https://play.google.com/store/apps/details?id=com.ama.psalad&gl=CH
+
 ## Demo Site
 you can check this project at link below:
 http://showtv.odehit.com/index.php/
