@@ -27,6 +27,8 @@ Route::get('/user', 'UsersController@index');
 Route::resource('/series', 'SeriesController');
 Route::get('/series/follow/{get}', 'SeriesController@follow');
 Route::get('/series/unfollow/{get}', 'SeriesController@unfollow');
+Route::get('/series//error/', 'SeriesController@error')->name('series.error');
 Route::resource('/episodes', 'EpisodeController');
 Route::get('/episodes/like/{get}', 'EpisodeController@like');
 Route::get('/episodes/dislike/{get}', 'EpisodeController@dislike');
+Route::get('/episodes//error', 'EpisodeController@error')->name('episodes.error');
