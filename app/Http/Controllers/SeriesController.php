@@ -24,9 +24,6 @@ class SeriesController extends AdminController
         $serieses = Series::paginate();
         return view('series.index', compact('serieses'))
             ->with('i', (request()->input('page', 1) - 1) * $serieses->perPage());
-
-//        $serieses = Series::get();
-//        return view('series/home')->with('serieses', $serieses);
     }
 
     /**
@@ -37,10 +34,7 @@ class SeriesController extends AdminController
     public function create()
     {
         if (!$this->isAdmin()) return $this->noPerm();
-        //if (config('app.vue', false)) 
-            return view('series/vadd')->with('submiturl', route('series.store')); 
-        //else
-        //    return view('series/add');
+        return view('series/vadd')->with('submiturl', route('series.store')); 
     }
 
     /**
@@ -70,8 +64,11 @@ class SeriesController extends AdminController
      */
     public function show($id)
     {
-        $series = Series::find($id);
         $menuSerieses = Series::take(5)->get();
+        $id = (int)$id;
+        if ($id < 1) return view('series.error', compact('menuSerieses'))->with('message', trans("This page does not exists"));
+        $series = Series::find($id);
+        if (!$series) return view('series.error', compact('menuSerieses'))->with('message', trans("This page does not exists"));
 
         $follow = new Follow();
         $follow->series_id = $id;
@@ -90,7 +87,10 @@ class SeriesController extends AdminController
     public function edit($id)
     {
         if (!$this->isAdmin()) return $this->noPerm();
+        $id = (int)$id;
+        if ($id < 1) return view('series.error')->with('message', trans("This page does not exists"));
         $series = Series::find($id);
+        if (!$series) return view('series.error')->with('message', trans("This page does not exists"));
 
         return view('series.vedit', compact('series'))->with('submiturl', route('series.update',$id));
     }
@@ -103,6 +103,11 @@ class SeriesController extends AdminController
      */
     public function follow($id)
     {
+        $id = (int)$id;
+        if ($id < 1) return trans("This series deleted or not exists");
+        $series = Series::find($id);
+        if (!$series) return trans("This series deleted or not exists");
+
         $follow = new Follow();
         $follow->series_id = $id;
         $follow->user_id = Auth::id();
@@ -121,6 +126,11 @@ class SeriesController extends AdminController
      */
     public function unfollow($id)
     {
+        $id = (int)$id;
+        if ($id < 1) return trans("This series deleted or not exists");
+        $series = Series::find($id);
+        if (!$series) return trans("This series deleted or not exists");
+
         Follow::where('series_id', '=', $id)->where('user_id', '=', Auth::id())->delete();;
 
         $series = Series::find($id);
@@ -146,7 +156,7 @@ class SeriesController extends AdminController
         $series->update($request->all());
 
         return redirect()->route('series.index')
-            ->with('success', 'Episode updated successfully');
+            ->with('success', 'series updated successfully');
     }
 
     /**
@@ -158,9 +168,30 @@ class SeriesController extends AdminController
     public function destroy($id)
     {
         if (!$this->isAdmin()) die('No Permission');
-        $series = Series::find($id)->delete();
+        $id = (int)$id;
+        if ($id < 1) return redirect()->route('series.error')
+            ->with('error', 'This page does not exists');
+
+        $series = Series::find($id);
+        if (!$series) return redirect()->route('series.error')
+            ->with('error', 'This series deleted or not exists');
+
+        $series->delete();
 
         return redirect()->route('series.index')
             ->with('success', 'Series deleted successfully');
     }
+
+
+    /**
+     * Display an error message
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function error()
+    {
+        $menuSerieses = Series::take(5)->get();
+        return view('series.error', compact('menuSerieses'))->with('message', '');
+    }
+
 }

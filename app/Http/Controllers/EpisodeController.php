@@ -37,13 +37,9 @@ class EpisodeController extends AdminController
     public function create()
     {
         if (!$this->isAdmin()) return $this->noPerm();
-       // die(Storage::disk('episodes')->path(''));
         $serieses = Series::get();
-        //if (config('app.vue', true)) 
-            return view('episodes/vadd')->with('serieses', $serieses)
-                ->with('submiturl', route('episodes.store'));
-        //else
-        //    return view('episodes/add')->with('serieses', $serieses);
+        return view('episodes/vadd')->with('serieses', $serieses)
+            ->with('submiturl', route('episodes.store'));
     }
 
     /**
@@ -94,12 +90,15 @@ class EpisodeController extends AdminController
      */
     public function show($id)
     {
+        $menuSerieses = Series::take(5)->get();
+        $id = (int)$id;
+        if ($id < 1) return view('episodes.error', compact('menuSerieses'))->with('message', trans("This page does not exists"));
         $episode = Episode::find($id);
+        if (!$episode) return view('episodes.error', compact('menuSerieses'))->with('message', trans("This page does not exists"));
 
         $videoAry = explode('.', $episode->video);
 
         $episode->ext = $videoAry[count($videoAry)-1];
-        $menuSerieses = Series::take(5)->get();
 
         $like = new Like();
         $like->episode_id = $id;
@@ -118,7 +117,11 @@ class EpisodeController extends AdminController
     public function edit($id)
     {
         if (!$this->isAdmin()) return $this->noPerm();
+        $id = (int)$id;
+        if ($id < 1) return view('episodes.error')->with('message', trans("This page does not exists"));
         $episode = Episode::find($id);
+        if (!$episode) return view('episodes.error')->with('message', trans("This page does not exists"));
+        
         $episode->img = Storage::disk('episodes')->url($episode->image);
         $episode->vid = Storage::disk('episodes')->url($episode->video);
         //$serieses = Series::pluck('title', 'id');
@@ -137,6 +140,11 @@ class EpisodeController extends AdminController
      */
     public function like($id)
     {
+        $id = (int)$id;
+        if ($id < 1) return trans("This episode deleted or not exists");
+        $episode = Episode::find($id);
+        if (!$episode) return trans("This episode deleted or not exists");
+
         $like = new Like();
         $like->episode_id = $id;
         $like->user_id = Auth::id();
@@ -155,6 +163,11 @@ class EpisodeController extends AdminController
      */
     public function dislike($id)
     {
+        $id = (int)$id;
+        if ($id < 1) return trans("This episode deleted or not exists");
+        $episode = Episode::find($id);
+        if (!$episode) return trans("This episode deleted or not exists");
+
         Like::where('episode_id', '=', $id)->where('user_id', '=', Auth::id())->delete();;
 
         $episode = Episode::find($id);
@@ -172,7 +185,6 @@ class EpisodeController extends AdminController
     {
         if (!$this->isAdmin()) die('No Permission');
         $request->validate(Episode::$rules);
-
 
         $episode->series_id = $request['series_id'];
         $episode->title = $request['title'];
@@ -218,8 +230,13 @@ class EpisodeController extends AdminController
     public function destroy($id)
     {
         if (!$this->isAdmin()) die('No Permission');
+        $id = (int)$id;
+        if ($id < 1) return redirect()->route('episodes.error')
+            ->with('error', 'This page does not exists');
 
         $episode = Episode::find($id);
+        if (!$episode) return redirect()->route('episodes.error')
+            ->with('error', 'This episode deleted or not exists');
 
         Storage::disk('episodes')->delete($episode->image);
         Storage::disk('episodes')->delete($episode->video);
@@ -229,4 +246,16 @@ class EpisodeController extends AdminController
         return redirect()->route('episodes.index')
             ->with('success', 'Episode deleted successfully');
     }
+
+    /**
+     * Display an error message
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function error()
+    {
+        $menuSerieses = Series::take(5)->get();
+        return view('episodes.error', compact('menuSerieses'))->with('message', '');
+    }
+
 }

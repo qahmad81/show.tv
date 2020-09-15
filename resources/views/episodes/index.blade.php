@@ -48,7 +48,7 @@
                                             <td>{{ ++$i }}</td>
                                             
 											<td>{{ $episode->title }}</td>
-                                            <td>{{ $episode->series->title }}</td>
+                                            <td>@if ($episode->series) {{ $episode->series->title }} @endif</td>
 											<td>{{ $episode->duration }}</td>
 											<td>{{ $episode->airing_time }}</td>
 
