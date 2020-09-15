@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Pagination\Paginator;
 use App\Series;
 use App\Episode;
 use App\Like;
@@ -24,6 +25,7 @@ class EpisodeController extends AdminController
     public function index()
     {
         if (!$this->isAdmin()) return $this->noPerm();
+        Paginator::useBootstrap();
         $episodes = Episode::paginate();
         return view('episodes.index', compact('episodes'))
             ->with('i', (request()->input('page', 1) - 1) * $episodes->perPage());
