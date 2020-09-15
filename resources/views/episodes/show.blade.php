@@ -60,7 +60,7 @@
                                 <span id="likes">{{ $episode->likes->count() }}</span>
                             </div>
                             <div class="form-group col-10">
-                            @if ($episode->is_follow)
+                            @if ($episode->is_like)
                                 <button type="button" id="likebtn" onclick="toggleLike()" class="btn btn-outline-primary">
                                 {{  __('Liked') }} </button>
                             @else
