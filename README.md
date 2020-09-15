@@ -49,8 +49,8 @@ Episodes should have the following properties:
 - Create/View/Edit/List Episodes
 
 ## Technology Used
--	Laravel 7
--	PHP 7.4
+-	Laravel 8.2
+-	PHP 7.3
 -	MySQL
 -	Bootstrap 4
 -	VueJS
