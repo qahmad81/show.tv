@@ -26,10 +26,12 @@
                         </div>
 
                         <div  class="col-6">
+                        @if ($episode->series) 
                         <div class="form-group">
                             <strong>Series:</strong>
                             <a class="btn btn-light" href="{{ route('series.show',$episode->series->id) }}">{{ $episode->series->title }}</a>
                         </div>
+                        @endif
                         <div class="form-group">
                             <strong>Title:</strong>
                             <a class="btn btn-light" href="{{ route('episodes.show',$episode->id) }}">{{ $episode->title }}</a>
